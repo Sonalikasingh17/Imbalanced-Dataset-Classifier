@@ -1,6 +1,6 @@
 # Class-Imbalance-Handling-(IDA2016-Dataset)
 
-This project implements a binary classification model using logistic regression to predict outcomes based on a structured dataset. The notebook and script include steps for data preprocessing, model training, evaluation, and visualization.
+This project implements a binary classification model using logistic regression to predict outcomes based on a structured dataset. The notebook and script include steps for data preprocessing, model training, evaluation, and visualization. 
 
 ---  
 
