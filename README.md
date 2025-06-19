@@ -8,7 +8,7 @@ This project implements a binary classification model using logistic regression 
 
 - The dataset is loaded from a `.csv` file using `pandas`.
 - It contains numeric features and a binary target variable (0 or 1).
-- Common tasks include:
+- Common tasks include: 
   - Checking for null values
   - Exploratory data analysis
   - Feature scaling or normalization
