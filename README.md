@@ -4,7 +4,7 @@ This project implements a binary classification model using logistic regression 
   
 ---  
 
-## Dataset
+## Dataset 
 
 - The dataset is loaded from a `.csv` file using `pandas`.
 - It contains numeric features and a binary target variable (0 or 1).
