@@ -1,0 +1,50 @@
+# Core ML Libraries
+pandas
+numpy
+scikit-learn
+datasets
+
+# Feature Engineering & NLP
+nltk
+langdetect
+
+# Model Persistence
+joblib
+pickle-mixin
+
+# Web App & Deployment
+streamlit
+streamlit-option-menu
+
+# Data Visualization
+matplotlib
+seaborn
+plotly
+
+# Utility Libraries
+tqdm
+pyyaml
+python-dotenv
+
+# Development & Testing
+pytest
+black
+flake8
+
+# Cloud & API
+boto3
+requests
+
+# System utilities
+psutil
+
+# Additional ML utilities
+imbalanced-learn
+
+# other 
+gdown
+ipykernel
+ipywidgets 
+kaggle
+
+#-e .
