@@ -4,6 +4,11 @@ numpy
 scikit-learn
 datasets
 
+# Data Visualization
+matplotlib
+seaborn
+plotly
+
 # Feature Engineering & NLP
 nltk
 langdetect
@@ -15,11 +20,6 @@ pickle-mixin
 # Web App & Deployment
 streamlit
 streamlit-option-menu
-
-# Data Visualization
-matplotlib
-seaborn
-plotly
 
 # Utility Libraries
 tqdm
