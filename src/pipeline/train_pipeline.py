@@ -26,7 +26,7 @@ class TrainingPipeline:
             model_trainer = ModelTrainer()
             model_score = model_trainer.initiate_model_trainer(train_arr, test_arr)
             
-            logging.f"Training pipeline completed. Model F1 Score: {model_score}")
+            logging.info(f"Training pipeline completed. Model F1 Score: {model_score}")
             print(f"Training pipeline completed. Model F1 Score: {model_score}")
             
             return model_score
