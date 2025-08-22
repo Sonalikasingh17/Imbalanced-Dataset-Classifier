@@ -42,6 +42,9 @@ psutil
 imbalanced-learn
 
 # other 
+dill
+flask
+
 gdown
 ipykernel
 ipywidgets 
