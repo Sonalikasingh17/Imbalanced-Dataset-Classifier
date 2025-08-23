@@ -220,8 +220,8 @@ logs/
 
 # Datasets
 *.csv
-*.json
-*.txt
+# *.json
+# *.txt
 *.tsv
 
 # Streamlit
