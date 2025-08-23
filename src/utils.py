@@ -65,9 +65,9 @@ def evaluate_models_bayesian(X_train, y_train, X_test, y_test, models, search_sp
                 bayes_cv = BayesSearchCV(
                     model,
                     search_space,
-                    n_iter=10,  # Reduce n_iter for fast tuning
+                    n_iter=2,  # Reduce n_iter for fast tuning
                     scoring='f1_macro',
-                    cv=3,
+                    cv=2,
                     n_jobs=-1,
                     verbose=0,
                     random_state=42

@@ -49,17 +49,17 @@ class ModelTrainer:
             # Define baseline models
             baseline_models = {
                 'Logistic Regression': LogisticRegression(random_state=42, max_iter=1000),
-                'SVM': SVC(random_state=42, probability=True),
                 'Decision Tree': DecisionTreeClassifier(random_state=42),
-                'Random Forest': RandomForestClassifier(random_state=42, n_jobs=-1)
+                'Random Forest': RandomForestClassifier(random_state=42, n_jobs=-1),
+                'SVM': SVC(random_state=42, probability=True)
             }
 
             # Define class-weighted models
             weighted_models = {
                 'Logistic Regression (Balanced)': LogisticRegression(random_state=42, max_iter=1000, class_weight='balanced'),
-                'SVM (Balanced)': SVC(random_state=42, probability=True, class_weight='balanced'),
                 'Decision Tree (Balanced)': DecisionTreeClassifier(random_state=42, class_weight='balanced'),
-                'Random Forest (Balanced)': RandomForestClassifier(random_state=42, n_jobs=-1, class_weight='balanced')
+                'Random Forest (Balanced)': RandomForestClassifier(random_state=42, n_jobs=-1, class_weight='balanced'),
+                'SVM (Balanced)': SVC(random_state=42, probability=True, class_weight='balanced')
             }
 
             # Define hyperparameters for Bayesian search
@@ -82,8 +82,7 @@ class ModelTrainer:
                 },
                 'SVM (Balanced)': {
                     'C': Real(1, 100, prior='log-uniform'),
-                    'kernel': Categorical(['rbf', 'poly']),
-                    'gamma': Real(1e-6, 1e+1, prior='log-uniform'),
+                    'kernel': Categorical(['rbf']),
                     'degree': Integer(2, 5)
                 },
                 'Decision Tree': {
