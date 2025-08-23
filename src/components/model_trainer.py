@@ -77,7 +77,6 @@ class ModelTrainer:
                 'SVM': {
                     'C': Real(1, 100, prior='log-uniform'),
                     'kernel': Categorical(['rbf', 'poly']),
-                    'gamma': Real(1e-6, 1e+1, prior='log-uniform'),
                     'degree': Integer(2, 5)
                 },
                 'SVM (Balanced)': {
