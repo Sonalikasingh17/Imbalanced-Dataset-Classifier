@@ -15,7 +15,7 @@ from imblearn.under_sampling import RandomUnderSampler
 
 from src.exception import CustomException
 from src.logger import logging
-from src.utils import save_object, evaluate_models
+from src.utils import save_object, evaluate_models_bayesian
 
 @dataclass
 class ModelTrainerConfig:
@@ -32,60 +32,6 @@ class ModelTrainer:
         os.makedirs(os.path.dirname(self.model_trainer_config.model_report_file_path), exist_ok=True)
         os.makedirs(os.path.dirname(self.model_trainer_config.model_comparison_file_path), exist_ok=True)
 
-    def evaluate_models_bayesian(self, X_train, y_train, X_test, y_test, models, search_spaces):
-        """
-        Evaluate models using Bayesian hyperparameter optimization
-        """
-        try:
-            model_report = {}
-            trained_models = {}
-            
-            for model_name, model in models.items():
-                logging.info(f"Training {model_name} with Bayesian optimization...")
-                print(f"\n🔄 Bayesian tuning {model_name}...")
-                
-                try:
-                    search_space = search_spaces[model_name]
-                    bayes_cv = BayesSearchCV(
-                        model,
-                        search_space,
-                        n_iter=10,  # Reduce n_iter for fast tuning
-                        scoring='f1_macro',
-                        cv=3,
-                        n_jobs=-1,
-                        verbose=0,
-                        random_state=42
-                    )
-                    
-                    # Fit the model
-                    bayes_cv.fit(X_train, y_train)
-                    
-                    # Get best model
-                    best_model = bayes_cv.best_estimator_
-                    
-                    # Make predictions
-                    y_pred_test = best_model.predict(X_test)
-                    
-                    # Calculate F1 score
-                    test_f1 = f1_score(y_test, y_pred_test, average='macro')
-                    
-                    # Store results
-                    model_report[model_name] = test_f1
-                    trained_models[model_name] = best_model
-                    
-                    print(f"  ✅ Best CV F1-Score: {bayes_cv.best_score_:.4f}")
-                    print(f"  ✅ Test F1-Score: {test_f1:.4f}")
-                    print(f"  🔧 Best params: {bayes_cv.best_params_}")
-                    
-                except Exception as e:
-                    print(f"  ❌ Error training {model_name}: {str(e)}")
-                    logging.error(f"Error training {model_name}: {str(e)}")
-                    continue
-            
-            return model_report, trained_models
-        
-        except Exception as e:
-            raise CustomException(e, sys)
 
     def initiate_model_trainer(self, train_array, test_array):
         try:
@@ -170,7 +116,7 @@ class ModelTrainer:
             print("\n🚀 TRAINING BASELINE MODELS")
             print("="*50)
             logging.info("Evaluating baseline models with Bayesian optimization")
-            baseline_report, baseline_trained_models = self.evaluate_models_bayesian(
+            baseline_report, baseline_trained_models = evaluate_models_bayesian(
                 X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test,
                 models=baseline_models, search_spaces=bayes_search_spaces
             )
@@ -209,7 +155,7 @@ class ModelTrainer:
                 "Random Forest (SMOTE)": bayes_search_spaces['Random Forest']
             }
 
-            smote_report, smote_trained_models = self.evaluate_models_bayesian(
+            smote_report, smote_trained_models = evaluate_models_bayesian(
                 X_train=X_train_smote, y_train=y_train_smote, X_test=X_test, y_test=y_test,
                 models=smote_models, search_spaces=smote_search_spaces
             )
