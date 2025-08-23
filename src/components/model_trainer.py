@@ -7,6 +7,9 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import f1_score, classification_report
+from skopt import BayesSearchCV
+from skopt.space import Real, Categorical, Integer
+
 from imblearn.over_sampling import SMOTE
 from imblearn.under_sampling import RandomUnderSampler
 
