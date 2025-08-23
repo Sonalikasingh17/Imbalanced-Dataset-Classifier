@@ -37,7 +37,7 @@ def load_object(file_path):
     except Exception as e:
         raise CustomException(e, sys)
     
-def evaluate_models_bayesian(self, X_train, y_train, X_test, y_test, models, search_spaces):
+def evaluate_models_bayesian(X_train, y_train, X_test, y_test, models, search_spaces):
         """
         Evaluate models using Bayesian hyperparameter optimization
         """
