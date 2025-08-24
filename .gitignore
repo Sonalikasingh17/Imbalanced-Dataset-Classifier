@@ -218,7 +218,7 @@ data/processed/
 logs/
 .mlflow/
 
-# Datasets
+# Datasetsg
 *.csv
 # *.json
 # *.txt
