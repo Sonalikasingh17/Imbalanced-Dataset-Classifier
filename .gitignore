@@ -219,7 +219,7 @@ logs/
 .mlflow/
 
 # Datasets
-*.csv
+# *.csv
 # *.json
 # *.txt
 *.tsv
