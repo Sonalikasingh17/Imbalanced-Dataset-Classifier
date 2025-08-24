@@ -24,30 +24,16 @@ def load_model_metadata():
         pass
     return None
 
-# def load_feature_info():
-    # """Load feature information from data transformation"""
-    # try:
-def fix_features_df(df, feature_info_path='artifacts/data_transformation/feature_info.json'):
-        try:
+def load_feature_info():
+    """Load feature information from data transformation"""
+    try:
+        feature_info_path = os.path.join('artifacts', 'data_transformation', 'feature_info.json')
+        if os.path.exists(feature_info_path):
             with open(feature_info_path, 'r') as f:
-                feature_info = json.load(f)
-            final_features = feature_info["final_features"]
-            
-            for col in final_features:
-                if col not in df.columns:
-                    df[col] = 0.0
-            
-            df = df.loc[:, df.columns.isin(final_features)]
-            df = df[final_features]
-            return df
-
-        # feature_info_path = os.path.join('artifacts', 'data_transformation', 'feature_info.json')
-        # if os.path.exists(feature_info_path):
-        #     with open(feature_info_path, 'r') as f:
-        #         return json.load(f)
-        except:
+                return json.load(f)
+    except:
             pass
-        return None
+    return None
 
 def load_model_comparison():
     """Load model comparison results"""
@@ -71,8 +57,8 @@ def main():
 
     # Load model metadata
     model_metadata = load_model_metadata()
-    # feature_info = load_feature_info()
-    feature_info = fix_features_df()
+    feature_info = load_feature_info()
+ 
     
     # Sidebar with enhanced model information
     st.sidebar.header("📋 Model Information")
@@ -190,13 +176,9 @@ def main():
         uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
         
 
-
-
-
         if uploaded_file is not None:
             try:
                 df = pd.read_csv(uploaded_file)
-                df = fix_features_df(df)
                 st.success(f"✅ File uploaded successfully! Shape: {df.shape}")
                 st.dataframe(df.head())
 
