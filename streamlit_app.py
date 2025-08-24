@@ -174,9 +174,25 @@ def main():
         st.subheader("📁 Upload Sensor Data File")
         uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
         
+
+        def fix_features_df(df, feature_info_path='artifacts/data_transformation/feature_info.json'):
+            with open(feature_info_path, 'r') as f:
+                feature_info = json.load(f)
+            final_features = feature_info["final_features"]
+            
+            for col in final_features:
+                if col not in df.columns:
+                    df[col] = 0.0
+            
+            df = df.loc[:, df.columns.isin(final_features)]
+            df = df[final_features]
+            return df
+
+
         if uploaded_file is not None:
             try:
                 df = pd.read_csv(uploaded_file)
+                df = fix_features_df(df)
                 st.success(f"✅ File uploaded successfully! Shape: {df.shape}")
                 st.dataframe(df.head())
 
@@ -184,6 +200,7 @@ def main():
                     if model_exists:
                         with st.spinner("Making predictions..."):
                             try:
+
                                 predict_pipeline = PredictPipeline()
                                 predictions = predict_pipeline.predict(df)
 

@@ -37,7 +37,7 @@ class PredictPipeline:
                 
                 # Step 1: Imputation
                 data_imputed = imputer.transform(features)
-                data_imputed_df = pd.DataFrame(data_imputed, columns=features.columns)
+                data_imputed_df = pd.DataFrame(data_imputed, columns= features.columns)
                 
                 # Step 2: Variance threshold (feature selection)
                 data_selected = variance_selector.transform(data_imputed_df)
