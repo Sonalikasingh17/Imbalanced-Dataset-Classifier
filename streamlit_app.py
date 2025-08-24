@@ -24,16 +24,30 @@ def load_model_metadata():
         pass
     return None
 
-def load_feature_info():
-    """Load feature information from data transformation"""
-    try:
-        feature_info_path = os.path.join('artifacts', 'data_transformation', 'feature_info.json')
-        if os.path.exists(feature_info_path):
+# def load_feature_info():
+    # """Load feature information from data transformation"""
+    # try:
+def fix_features_df(df, feature_info_path='artifacts/data_transformation/feature_info.json'):
+        try:
             with open(feature_info_path, 'r') as f:
-                return json.load(f)
-    except:
-        pass
-    return None
+                feature_info = json.load(f)
+            final_features = feature_info["final_features"]
+            
+            for col in final_features:
+                if col not in df.columns:
+                    df[col] = 0.0
+            
+            df = df.loc[:, df.columns.isin(final_features)]
+            df = df[final_features]
+            return df
+
+        # feature_info_path = os.path.join('artifacts', 'data_transformation', 'feature_info.json')
+        # if os.path.exists(feature_info_path):
+        #     with open(feature_info_path, 'r') as f:
+        #         return json.load(f)
+        except:
+            pass
+        return None
 
 def load_model_comparison():
     """Load model comparison results"""
@@ -57,7 +71,8 @@ def main():
 
     # Load model metadata
     model_metadata = load_model_metadata()
-    feature_info = load_feature_info()
+    # feature_info = load_feature_info()
+    feature_info = fix_features_df()
     
     # Sidebar with enhanced model information
     st.sidebar.header("📋 Model Information")
@@ -180,21 +195,6 @@ def main():
 
         if uploaded_file is not None:
             try:
-
-                def fix_features_df(df, feature_info_path='artifacts/data_transformation/feature_info.json'):
-                    with open(feature_info_path, 'r') as f:
-                        feature_info = json.load(f)
-                    final_features = feature_info["final_features"]
-                    
-                    for col in final_features:
-                        if col not in df.columns:
-                            df[col] = 0.0
-                    
-                    df = df.loc[:, df.columns.isin(final_features)]
-                    df = df[final_features]
-                    return df
-
-
                 df = pd.read_csv(uploaded_file)
                 df = fix_features_df(df)
                 st.success(f"✅ File uploaded successfully! Shape: {df.shape}")
@@ -204,7 +204,6 @@ def main():
                     if model_exists:
                         with st.spinner("Making predictions..."):
                             try:
-
                                 predict_pipeline = PredictPipeline()
                                 predictions = predict_pipeline.predict(df)
 
