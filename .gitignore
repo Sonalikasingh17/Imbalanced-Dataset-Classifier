@@ -218,7 +218,11 @@ data/processed/
 logs/
 .mlflow/
 
+<<<<<<< HEAD
 # Datasetsg
+=======
+# Datasets
+>>>>>>> cbd528fcf1bc76201c71d5f24bbddf6258ca3a38
 *.csv
 # *.json
 # *.txt

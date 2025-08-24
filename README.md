@@ -1,7 +1,11 @@
 # Imbalanced Dataset Classifier - APS Failure Prediction
 
+<<<<<<< HEAD
 [![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-Live%20App-brightgreen?logo=streamlit)]()
+=======
+[![Streamlit](https://img.shields.io/badge/Streamlit-Live%20App-brightgreen?logo=streamlit)](https://sonalikasingh17-imbalanced-dataset-classif-streamlit-app-rzrtxi.streamlit.app/)
+>>>>>>> cbd528fcf1bc76201c71d5f24bbddf6258ca3a38
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![scikit-learn](https://img.shields.io/badge/scikit_learn-F7931E?logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
 
@@ -13,6 +17,7 @@ This is a comprehensive end-to-end machine learning project that predicts Air Pr
 
 ---
 
+<<<<<<< HEAD
 ## 🎥 Demo
 
 <div style="display: flex; flex-wrap: wrap; gap: 8px;">
@@ -22,6 +27,8 @@ This is a comprehensive end-to-end machine learning project that predicts Air Pr
 
 ---
 
+=======
+>>>>>>> cbd528fcf1bc76201c71d5f24bbddf6258ca3a38
 ## 🎯 Problem Statement
 
 The dataset consists of data collected from heavy Scania trucks in everyday usage. The system in focus is the Air Pressure system (APS) which generates pressurized air utilized in various functions such as braking and gear changes. The challenge is to predict whether a failure is related to the APS system or other components, with the added complexity of severe class imbalance.
@@ -160,11 +167,19 @@ The project evaluates multiple algorithms with class imbalance handling:
 
 | Model | Technique | F1-Score (Macro) |
 |-------|-----------|------------------|
+<<<<<<< HEAD
 | Logistic Regression | Baseline | ~0.45 |
 | Logistic Regression | Balanced Weights | ~0.52 |
 | Decision Tree | SMOTE | ~0.58 |
 | Random Forest | Balanced + SMOTE | ~0.62 |
 | SVM | Class Weights | ~0.48 |
+=======
+| Logistic Regression | Baseline | ~0.845 |
+| Logistic Regression | Balanced Weights | ~0.750 |
+| Decision Tree | SMOTE | ~0.848 |
+| Random Forest | Balanced + SMOTE | ~0.890 |
+| SVM | Class Weights | ~0.784 |
+>>>>>>> cbd528fcf1bc76201c71d5f24bbddf6258ca3a38
 
 ---
 
@@ -186,9 +201,15 @@ The web application provides:
 - **Data Validation**: Comprehensive checks for data quality
 
 ### Model Selection
+<<<<<<< HEAD
 - **Grid Search with Cross-Validation**: Automated hyperparameter tuning
 - **Stratified Sampling**: Maintains class distribution in train/test splits
 - **Multiple Algorithm Comparison**: Systematic evaluation of different approaches
+=======
+- **Bayesian Hyperparameter Optimization**: Replaces grid search for faster and more efficient tuning with fewer iterations while maintaining model quality.
+- **Stratified Sampling**: Maintains class distribution in train/test splits to handle severe class imbalance.
+- **Multiple Algorithm Comparison**: Systematic evaluation with balanced and sampling-based approaches.
+>>>>>>> cbd528fcf1bc76201c71d5f24bbddf6258ca3a38
 
 ### MLOps Best Practices
 - **Artifact Management**: Organized storage of models and preprocessors
@@ -216,6 +237,7 @@ streamlit run streamlit_app.py
 2. Connect to Streamlit Cloud
 3. Deploy directly from repository
 
+<<<<<<< HEAD
 ### Docker Deployment
 ```dockerfile
 FROM python:3.8-slim
@@ -227,6 +249,8 @@ EXPOSE 8501
 CMD ["streamlit", "run", "streamlit_app.py"]
 ```
 
+=======
+>>>>>>> cbd528fcf1bc76201c71d5f24bbddf6258ca3a38
 ---
 
 
