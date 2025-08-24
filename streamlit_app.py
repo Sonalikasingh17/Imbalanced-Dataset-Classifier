@@ -348,7 +348,7 @@ def main():
         st.subheader("📈 Model Training Report")
         report_path = os.path.join('artifacts', 'model_trainer', 'training_report.txt')
         if os.path.exists(report_path):
-            with open(report_path, 'r') as f:
+            with open(report_path, 'r',encoding='utf-8', errors='replace') as f:
                 report_content = f.read()
             st.text(report_content)
         else:
