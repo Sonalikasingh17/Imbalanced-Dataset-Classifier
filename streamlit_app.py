@@ -182,6 +182,25 @@ def main():
                 st.success(f"✅ File uploaded successfully! Shape: {df.shape}")
                 st.dataframe(df.head())
 
+                # Fix df columns to match final_features from feature_info.json
+                feature_info = load_feature_info()
+                if feature_info and "final_features" in feature_info:
+                    final_features = feature_info["final_features"]
+
+                    # Add missing columns with zeros
+                    for col in final_features:
+                        if col not in df.columns:
+                            df[col] = 0.0
+
+                    # Remove extra columns not in final_features
+                    df = df.loc[:, df.columns.isin(final_features)]
+
+                    # Reorder columns to match the model's expected order
+                    df = df[final_features]
+
+                    st.info(f"⚡ Adjusted features to match model's expected input columns ({len(final_features)} features).")
+
+
                 if st.button("🔍 Predict from File", type="primary"):
                     if model_exists:
                         with st.spinner("Making predictions..."):
