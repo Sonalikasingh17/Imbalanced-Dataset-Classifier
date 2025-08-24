@@ -236,4 +236,4 @@ def validate_data_quality(X_train, X_test, y_train, y_test):
         
     except Exception as e:
         logging.error(f"Error in data quality validation: {str(e)}")
-        raise CustomException(e, sys)
+        raise CustomException(e,sys)
