@@ -76,13 +76,12 @@ class ModelTrainer:
                 },
                 'SVM': {
                     'C': Real(1, 100, prior='log-uniform'),
-                    'kernel': Categorical(['rbf', 'poly']),
+                    'kernel': Categorical(['rbf']),
                     'degree': Integer(2, 5)
                 },
                 'SVM (Balanced)': {
-                    'C': Real(1, 100, prior='log-uniform'),
-                    'kernel': Categorical(['rbf']),
-                    'degree': Integer(2, 5)
+                    'C': Real(1, 10, prior='log-uniform'),
+                    'kernel': Categorical(['rbf'])
                 },
                 'Decision Tree': {
                     'max_depth': Integer(5, 25),
@@ -90,8 +89,8 @@ class ModelTrainer:
                     'min_samples_leaf': Integer(1, 4)
                 },
                 'Decision Tree (Balanced)': {
-                    'max_depth': Integer(5, 25),
-                    'min_samples_split': Integer(2, 10),
+                    'max_depth': Integer(15,20, 25),
+                    'min_samples_split': Integer(2, 5),
                     'min_samples_leaf': Integer(1, 4)
                 },
                 'Random Forest': {
@@ -101,7 +100,7 @@ class ModelTrainer:
                 },
                 'Random Forest (Balanced)': {
                     'n_estimators': Integer(50, 100),
-                    'max_depth': Integer(10, 20),
+                    'max_depth': Integer(15, 20),
                     'min_samples_split': Integer(2, 5)
                 }
             }
@@ -123,7 +122,7 @@ class ModelTrainer:
             print("\n🚀 TRAINING CLASS-WEIGHTED MODELS")
             print("="*50)
             logging.info("Evaluating class-weighted models with Bayesian optimization")
-            weighted_report, weighted_trained_models = self.evaluate_models_bayesian(
+            weighted_report, weighted_trained_models = evaluate_models_bayesian(
                 X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test,
                 models=weighted_models, search_spaces=bayes_search_spaces
             )
